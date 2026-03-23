@@ -8,5 +8,22 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jayhyq93/turnover-bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/jayhyq93/turnover-bot/issues"
+  },
+  "homepage": "https://github.com/jayhyq93/turnover-bot#readme",
+  "dependencies": {
+    "input": "^1.0.1",
+    "puppeteer": "^24.40.0",
+    "telegram": "^2.26.22"
   }
 }

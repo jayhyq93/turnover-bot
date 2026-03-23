@@ -13,6 +13,8 @@ const T = {
     en: {
         welcome: `🔥 *Welcome to TURNOVER!*\n\n_From Defeat To Rebirth_\n\nMalaysia's #1 Profit Sharing Slot Platform.\n\n✅ 30% Daily Profit Sharing\n✅ 50% Welcome Bonus\n✅ 30% Referral Commission\n\nHow can I help you today?`,
         menu: `📋 *Main Menu*\n\nChoose an option below:`,
+        btn_account: '👤 Register / Deposit / Withdraw',
+        btn_rewards: '💎 Bonus / Profit Sharing / Referral',
         btn_register: '📝 Register Account',
         btn_deposit: '💰 Deposit',
         btn_withdraw: '💸 Withdrawal',
@@ -20,8 +22,6 @@ const T = {
         btn_games: '🎰 Games',
         btn_profit: '📊 Profit Sharing',
         btn_referral: '👥 Referral Program',
-        btn_language: '🌐 Change Language',
-        btn_livechat: '💬 Live Support',
         btn_back: '◀️ Back to Menu',
         register: `📝 *How To Register*\n\n1. Click the Live Support button below\n2. Our agent will create your account\n3. Make your first deposit\n4. Start playing & earning!\n\n⚡ Registration is FREE and takes less than 5 minutes.`,
         deposit: `💰 *How To Deposit*\n\n1. Contact our Live Support\n2. Tell the agent your desired amount\n3. Agent will provide bank account details\n4. Transfer and send your receipt\n5. Credits added instantly!\n\n🏦 *Supported:* Local bank transfer, TNG eWallet, GrabPay\n⚡ Processing time: Instant`,
@@ -37,6 +37,8 @@ const T = {
     ms: {
         welcome: `🔥 *Selamat Datang ke TURNOVER!*\n\n_Dari Kalah Kepada Kebangkitan_\n\nPlatform Slot Kongsi Keuntungan #1 Malaysia.\n\n✅ 30% Kongsi Keuntungan Harian\n✅ 50% Bonus Selamat Datang\n✅ 30% Komisen Rujukan\n\nBoleh saya bantu anda?`,
         menu: `📋 *Menu Utama*\n\nPilih pilihan di bawah:`,
+        btn_account: '👤 Daftar / Deposit / Pengeluaran',
+        btn_rewards: '💎 Bonus / Kongsi Untung / Rujukan',
         btn_register: '📝 Daftar Akaun',
         btn_deposit: '💰 Deposit',
         btn_withdraw: '💸 Pengeluaran',
@@ -44,8 +46,6 @@ const T = {
         btn_games: '🎰 Permainan',
         btn_profit: '📊 Kongsi Keuntungan',
         btn_referral: '👥 Program Rujukan',
-        btn_language: '🌐 Tukar Bahasa',
-        btn_livechat: '💬 Sokongan Langsung',
         btn_back: '◀️ Kembali ke Menu',
         register: `📝 *Cara Mendaftar*\n\n1. Klik butang Sokongan Langsung di bawah\n2. Ejen kami akan cipta akaun anda\n3. Buat deposit pertama anda\n4. Mula bermain & menjana pendapatan!\n\n⚡ Pendaftaran adalah PERCUMA dan mengambil masa kurang dari 5 minit.`,
         deposit: `💰 *Cara Deposit*\n\n1. Hubungi Sokongan Langsung kami\n2. Beritahu ejen jumlah yang dikehendaki\n3. Ejen akan berikan butiran akaun bank\n4. Pindah dan hantar resit anda\n5. Kredit ditambah serta-merta!\n\n🏦 *Disokong:* Pindahan bank tempatan, TNG eWallet, GrabPay\n⚡ Masa pemprosesan: Serta-merta`,
@@ -90,12 +90,9 @@ async function sendMessage(chatId, text, keyboard = null) {
 function mainMenuKeyboard(chatId) {
     return {
         inline_keyboard: [
-            [{ text: t(chatId, 'btn_register'), callback_data: 'register' }, { text: t(chatId, 'btn_deposit'), callback_data: 'deposit' }],
-            [{ text: t(chatId, 'btn_withdraw'), callback_data: 'withdraw' }, { text: t(chatId, 'btn_bonus'), callback_data: 'bonus' }],
-            [{ text: t(chatId, 'btn_games'), callback_data: 'games' }, { text: t(chatId, 'btn_profit'), callback_data: 'profit' }],
-            [{ text: t(chatId, 'btn_referral'), callback_data: 'referral' }],
-            [{ text: t(chatId, 'btn_language'), callback_data: 'language' }],
-            [{ text: t(chatId, 'btn_livechat'), callback_data: 'livechat' }]
+            [{ text: t(chatId, 'btn_account'), callback_data: 'account' }],
+            [{ text: t(chatId, 'btn_rewards'), callback_data: 'rewards' }],
+            [{ text: t(chatId, 'btn_games'), callback_data: 'games' }]
         ]
     };
 }
@@ -103,17 +100,40 @@ function mainMenuKeyboard(chatId) {
 function backKeyboard(chatId) {
     return {
         inline_keyboard: [
-            [{ text: t(chatId, 'btn_back'), callback_data: 'menu' }],
-            [{ text: t(chatId, 'btn_livechat'), callback_data: 'livechat' }]
+            [{ text: t(chatId, 'btn_back'), callback_data: 'menu' }]
         ]
     };
 }
 
-function languageKeyboard() {
+function accountKeyboard(chatId) {
     return {
         inline_keyboard: [
-            [{ text: '🇬🇧 English', callback_data: 'lang_en' }, { text: '🇲🇾 Bahasa Melayu', callback_data: 'lang_ms' }],
-            [{ text: '◀️ Back', callback_data: 'menu' }]
+            [{ text: t(chatId, 'btn_register'), callback_data: 'register' }],
+            [{ text: t(chatId, 'btn_deposit'), callback_data: 'deposit' }],
+            [{ text: t(chatId, 'btn_withdraw'), callback_data: 'withdraw' }],
+            [{ text: t(chatId, 'btn_back'), callback_data: 'menu' }]
+        ]
+    };
+}
+
+function rewardsKeyboard(chatId) {
+    return {
+        inline_keyboard: [
+            [{ text: t(chatId, 'btn_bonus'), callback_data: 'bonus' }],
+            [{ text: t(chatId, 'btn_profit'), callback_data: 'profit' }],
+            [{ text: t(chatId, 'btn_referral'), callback_data: 'referral' }],
+            [{ text: t(chatId, 'btn_back'), callback_data: 'menu' }]
+        ]
+    };
+}
+
+function gamesKeyboard(chatId) {
+    return {
+        inline_keyboard: [
+            [{ text: '🏆 MEGA888 — Download', url: 'https://m.mega566.com/mega/index.html' }],
+            [{ text: '🔥 PUSSY888 — Coming Soon', callback_data: 'coming_soon' }],
+            [{ text: '⭐ 918KISS — Coming Soon', callback_data: 'coming_soon' }],
+            [{ text: t(chatId, 'btn_back'), callback_data: 'menu' }]
         ]
     };
 }
@@ -131,6 +151,10 @@ async function handleCallback(chatId, callbackData, messageId, firstName) {
 
     if (callbackData === 'menu') {
         await sendMessage(chatId, t(chatId, 'menu'), mainMenuKeyboard(chatId));
+    } else if (callbackData === 'account') {
+        await sendMessage(chatId, '👤 *Account Services*\n\nWhat do you need help with?', accountKeyboard(chatId));
+    } else if (callbackData === 'rewards') {
+        await sendMessage(chatId, '💎 *Rewards & Earnings*\n\nExplore our reward programs:', rewardsKeyboard(chatId));
     } else if (callbackData === 'register') {
         await sendMessage(chatId, t(chatId, 'register'), backKeyboard(chatId));
     } else if (callbackData === 'deposit') {
@@ -140,29 +164,13 @@ async function handleCallback(chatId, callbackData, messageId, firstName) {
     } else if (callbackData === 'bonus') {
         await sendMessage(chatId, t(chatId, 'bonus'), backKeyboard(chatId));
     } else if (callbackData === 'games') {
-        await sendMessage(chatId, t(chatId, 'games'), backKeyboard(chatId));
+        await sendMessage(chatId, t(chatId, 'games'), gamesKeyboard(chatId));
     } else if (callbackData === 'profit') {
         await sendMessage(chatId, t(chatId, 'profit'), backKeyboard(chatId));
     } else if (callbackData === 'referral') {
         await sendMessage(chatId, t(chatId, 'referral'), backKeyboard(chatId));
-    } else if (callbackData === 'language') {
-        await sendMessage(chatId, '🌐 *Choose your language / Pilih bahasa anda:*', languageKeyboard());
-    } else if (callbackData === 'lang_en') {
-        if (!userState[chatId]) userState[chatId] = {};
-        userState[chatId].lang = 'en';
-        await sendMessage(chatId, '✅ Language set to *English*', mainMenuKeyboard(chatId));
-    } else if (callbackData === 'lang_ms') {
-        if (!userState[chatId]) userState[chatId] = {};
-        userState[chatId].lang = 'ms';
-        await sendMessage(chatId, '✅ Bahasa ditetapkan kepada *Bahasa Melayu*', mainMenuKeyboard(chatId));
-    } else if (callbackData === 'livechat') {
-        const keyboard = {
-            inline_keyboard: [
-                [{ text: t(chatId, 'livechat_btn'), url: 'https://turn8ver.com' }],
-                [{ text: t(chatId, 'btn_back'), callback_data: 'menu' }]
-            ]
-        };
-        await sendMessage(chatId, t(chatId, 'livechat'), keyboard);
+    } else if (callbackData === 'coming_soon') {
+        await sendMessage(chatId, '⏳ *Coming Soon!*\n\nThis game will be available shortly. Stay tuned! 🔥', backKeyboard(chatId));
     }
 }
 

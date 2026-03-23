@@ -3,6 +3,7 @@ const API = `https://api.telegram.org/bot${TOKEN}`;
 
 // ========== CONFIG ==========
 const ADMIN_CHAT_ID = 7767296227; // @GADGET4544 - receives withdrawal & deposit notifications
+const AGENT_USERNAME = 'TurnoverNana'; // Customer service account
 
 // ========== STATE ==========
 const userState = {}; // track user language preference
@@ -10,7 +11,7 @@ const userState = {}; // track user language preference
 // ========== TRANSLATIONS ==========
 const T = {
     en: {
-        welcome: `🔥 *Welcome to TURNOVER!*\n\n_From Defeat To Rebirth_\n\nMalaysia's #1 Profit Sharing Slot Platform.\n\n✅ 30% Daily Profit Sharing\n✅ 50% Welcome Bonus\n✅ 30% Referral Commission\n\nHow can I help you today?`,
+        welcome: `🔥 *Welcome to TURNOVER!*\n\n_From Defeat To Rebirth_\n\nMalaysia's #1 Profit Sharing Slot Platform.\n\n✅ 30% Daily Profit Sharing\n✅ 50% Welcome Bonus\n✅ 30% Referral Commission\n\n💬 Need help? Contact us: @TurnoverNana\n\nHow can I help you today?`,
         menu: `📋 *Main Menu*\n\nChoose an option below:`,
         btn_account: '👤 Register / Deposit / Withdraw',
         btn_rewards: '💎 Bonus / Profit Sharing / Referral',
@@ -34,7 +35,7 @@ const T = {
         unknown: `❓ I didn't understand that. Please use the menu below.`,
     },
     ms: {
-        welcome: `🔥 *Selamat Datang ke TURNOVER!*\n\n_Dari Kalah Kepada Kebangkitan_\n\nPlatform Slot Kongsi Keuntungan #1 Malaysia.\n\n✅ 30% Kongsi Keuntungan Harian\n✅ 50% Bonus Selamat Datang\n✅ 30% Komisen Rujukan\n\nBoleh saya bantu anda?`,
+        welcome: `🔥 *Selamat Datang ke TURNOVER!*\n\n_Dari Kalah Kepada Kebangkitan_\n\nPlatform Slot Kongsi Keuntungan #1 Malaysia.\n\n✅ 30% Kongsi Keuntungan Harian\n✅ 50% Bonus Selamat Datang\n✅ 30% Komisen Rujukan\n\n💬 Perlukan bantuan? Hubungi: @TurnoverNana\n\nBoleh saya bantu anda?`,
         menu: `📋 *Menu Utama*\n\nPilih pilihan di bawah:`,
         btn_account: '👤 Daftar / Deposit / Pengeluaran',
         btn_rewards: '💎 Bonus / Kongsi Untung / Rujukan',
@@ -102,6 +103,7 @@ function mainMenuKeyboard(chatId) {
             [{ text: t(chatId, 'btn_account'), callback_data: 'account' }],
             [{ text: t(chatId, 'btn_rewards'), callback_data: 'rewards' }],
             [{ text: t(chatId, 'btn_games'), callback_data: 'games' }],
+            [{ text: '💬 Chat with Agent', url: 'https://t.me/TurnoverNana' }],
             [{ text: '📢 Join Our Channel', url: 'https://t.me/turn8ver' }]
         ]
     };
@@ -110,6 +112,7 @@ function mainMenuKeyboard(chatId) {
 function backKeyboard(chatId) {
     return {
         inline_keyboard: [
+            [{ text: '💬 Chat with Agent', url: 'https://t.me/TurnoverNana' }],
             [{ text: t(chatId, 'btn_back'), callback_data: 'menu' }]
         ]
     };

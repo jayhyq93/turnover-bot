@@ -2,8 +2,7 @@ const TOKEN = '8605378805:AAF6mtYC2C3rTT3gOpjO70DjXnEDfyu_gbM';
 const API = `https://api.telegram.org/bot${TOKEN}`;
 
 // ========== CONFIG ==========
-// Change this to your actual admin/support Telegram user ID or username
-const ADMIN_CHAT_ID = null; // Set to your Telegram user ID to receive forwarded messages
+const ADMIN_CHAT_ID = 7767296227; // @GADGET4544 - receives withdrawal & deposit notifications
 
 // ========== STATE ==========
 const userState = {}; // track user language preference
@@ -25,7 +24,7 @@ const T = {
         btn_back: '◀️ Back to Menu',
         register: `📝 *How To Register*\n\n1. Click the Live Support button below\n2. Our agent will create your account\n3. Make your first deposit\n4. Start playing & earning!\n\n⚡ Registration is FREE and takes less than 5 minutes.`,
         deposit: `💰 *How To Deposit*\n\n*Step 1:* Transfer to our bank account below 👇\n\n🏦 *Bank:* BANK ISLAM\n👤 *Name:* PUAN SHARIFAH FATIMAH\n🔢 *Account:* 13044021038654\n\n*Step 2:* Screenshot your transfer receipt\n\n*Step 3:* Send receipt + your Game ID to our agent\n\n⚡ Credits added within 5 minutes after verification!\n\n✅ Min deposit: RM30\n✅ New members get 50% Welcome Bonus!`,
-        withdraw: `💸 *How To Withdraw*\n\n1. Contact our Live Support\n2. Provide your bank account details\n3. State the amount you want to withdraw\n4. Agent processes your request\n\n⚡ Processing time: 5-15 minutes\n✅ No withdrawal fees`,
+        withdraw: `💸 *How To Withdraw*\n\nPlease provide the following details:\n\n1️⃣ Your Game ID (MEGA888)\n2️⃣ Withdrawal amount (RM)\n3️⃣ Your bank name\n4️⃣ Your bank account number\n5️⃣ Account holder name\n\nReply with all details and we will process within 5-15 minutes!\n\n✅ No withdrawal fees\n✅ Min withdrawal: RM50`,
         bonus: `🎁 *Bonuses & Promotions*\n\n🌟 *50% Welcome Bonus*\nDeposit RM100 → Get RM150!\nFirst deposit only. New members.\n\n👥 *30% Referral Commission*\nInvite friends, earn 30% of their first deposit. Unlimited referrals!\n\n📅 *Daily Reload Bonus*\nBonus on every reload. Ask support for details.\n\n💡 Contact Live Support to claim any bonus!`,
         games: `🎰 *Available Games*\n\n🏆 *MEGA888*\nMalaysia's most popular slot platform. Hundreds of slot, table & arcade games.\n\n🔥 *PUSSY888*\nHigh-payout slots with stunning graphics.\n\n⭐ *918KISS*\nThe legendary classic trusted by millions.\n\n🎯 All games generate *turnover* towards your daily profit share!\n\nContact support to download any game.`,
         profit: `📊 *Profit Sharing System*\n\n💡 *How It Works:*\nEvery bet you place = Turnover\nYour turnover % = Your profit share\n\n📈 *Example:*\nPlatform earns RM10,000 today\n30% = RM3,000 distributed\nYou contributed 5% of total turnover\nYou receive: RM150!\n\n✅ Distributed DAILY\n✅ Transparent calculation\n✅ No minimum turnover\n\nThe more you play, the more you earn!`,
@@ -49,7 +48,7 @@ const T = {
         btn_back: '◀️ Kembali ke Menu',
         register: `📝 *Cara Mendaftar*\n\n1. Klik butang Sokongan Langsung di bawah\n2. Ejen kami akan cipta akaun anda\n3. Buat deposit pertama anda\n4. Mula bermain & menjana pendapatan!\n\n⚡ Pendaftaran adalah PERCUMA dan mengambil masa kurang dari 5 minit.`,
         deposit: `💰 *Cara Deposit*\n\n*Langkah 1:* Pindah ke akaun bank kami 👇\n\n🏦 *Bank:* BANK ISLAM\n👤 *Nama:* PUAN SHARIFAH FATIMAH\n🔢 *Akaun:* 13044021038654\n\n*Langkah 2:* Tangkap skrin resit pindahan anda\n\n*Langkah 3:* Hantar resit + ID Permainan anda kepada ejen kami\n\n⚡ Kredit ditambah dalam 5 minit selepas pengesahan!\n\n✅ Deposit minimum: RM30\n✅ Ahli baru dapat 50% Bonus Selamat Datang!`,
-        withdraw: `💸 *Cara Pengeluaran*\n\n1. Hubungi Sokongan Langsung kami\n2. Berikan butiran akaun bank anda\n3. Nyatakan jumlah yang ingin dikeluarkan\n4. Ejen memproses permintaan anda\n\n⚡ Masa pemprosesan: 5-15 minit\n✅ Tiada caj pengeluaran`,
+        withdraw: `💸 *Cara Pengeluaran*\n\nSila berikan maklumat berikut:\n\n1️⃣ ID Permainan anda (MEGA888)\n2️⃣ Jumlah pengeluaran (RM)\n3️⃣ Nama bank anda\n4️⃣ Nombor akaun bank anda\n5️⃣ Nama pemegang akaun\n\nBalas dengan semua maklumat dan kami akan proses dalam 5-15 minit!\n\n✅ Tiada caj pengeluaran\n✅ Min pengeluaran: RM50`,
         bonus: `🎁 *Bonus & Promosi*\n\n🌟 *50% Bonus Selamat Datang*\nDeposit RM100 → Dapat RM150!\nDeposit pertama sahaja. Ahli baru.\n\n👥 *30% Komisen Rujukan*\nJemput rakan, dapat 30% dari deposit pertama mereka!\n\n📅 *Bonus Reload Harian*\nBonus pada setiap reload. Tanya sokongan untuk maklumat lanjut.\n\n💡 Hubungi Sokongan Langsung untuk tuntut sebarang bonus!`,
         games: `🎰 *Permainan Tersedia*\n\n🏆 *MEGA888*\nPlatform slot paling popular di Malaysia. Ratusan permainan slot, meja & arked.\n\n🔥 *PUSSY888*\nSlot pembayaran tinggi dengan grafik memukau.\n\n⭐ *918KISS*\nKlasik lagenda yang dipercayai jutaan pemain.\n\n🎯 Semua permainan menjana *turnover* untuk bahagian keuntungan harian anda!\n\nHubungi sokongan untuk muat turun mana-mana permainan.`,
         profit: `📊 *Sistem Kongsi Keuntungan*\n\n💡 *Cara Ia Berfungsi:*\nSetiap pertaruhan = Turnover\n% turnover anda = Bahagian keuntungan anda\n\n📈 *Contoh:*\nPlatform jana RM10,000 hari ini\n30% = RM3,000 diagihkan\nAnda menyumbang 5% jumlah turnover\nAnda terima: RM150!\n\n✅ Diagihkan SETIAP HARI\n✅ Pengiraan telus\n✅ Tiada minimum turnover`,
@@ -211,6 +210,21 @@ async function poll() {
                 const text = msg.text || '';
                 const firstName = msg.from?.first_name || '';
 
+                // Handle photo (bank receipt)
+                if (msg.photo && ADMIN_CHAT_ID && chatId !== ADMIN_CHAT_ID) {
+                    const caption = msg.caption || '(no caption)';
+                    const fwdCaption = `🧾 *Receipt from customer*\n👤 Name: ${firstName}\n🆔 Chat ID: \`${chatId}\`\n📝 Caption: ${caption}`;
+                    // Forward photo to admin
+                    const fileId = msg.photo[msg.photo.length - 1].file_id;
+                    await fetch(`${API}/sendPhoto`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ chat_id: ADMIN_CHAT_ID, photo: fileId, caption: fwdCaption, parse_mode: 'Markdown' })
+                    });
+                    await sendMessage(chatId, `✅ *Receipt received!*\n\nOur agent is verifying your payment. Credits will be added within 5 minutes.\n\n_Thank you for your patience!_ 🙏`, backKeyboard(chatId));
+                    continue;
+                }
+
                 console.log(`[MSG] ${chatId} (${firstName}): ${text}`);
 
                 if (text === '/start' || text === '/menu') {
@@ -218,8 +232,13 @@ async function poll() {
                 } else if (text === '/help') {
                     await sendMessage(chatId, t(chatId, 'menu'), mainMenuKeyboard(chatId));
                 } else {
-                    // For any other text, show menu
-                    await sendMessage(chatId, t(chatId, 'unknown'), mainMenuKeyboard(chatId));
+                    // Forward message to admin
+                    if (ADMIN_CHAT_ID && chatId !== ADMIN_CHAT_ID) {
+                        const fwdText = `📨 *Message from customer*\n👤 Name: ${firstName}\n🆔 Chat ID: \`${chatId}\`\n\n💬 *Message:*\n${text}`;
+                        await sendMessage(ADMIN_CHAT_ID, fwdText);
+                    }
+                    // Auto reply to customer
+                    await sendMessage(chatId, `✅ Message received! Our agent will respond shortly.\n\n_Please allow 1-5 minutes for response._`, backKeyboard(chatId));
                 }
             }
 

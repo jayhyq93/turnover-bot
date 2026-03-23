@@ -92,7 +92,8 @@ function mainMenuKeyboard(chatId) {
         inline_keyboard: [
             [{ text: t(chatId, 'btn_account'), callback_data: 'account' }],
             [{ text: t(chatId, 'btn_rewards'), callback_data: 'rewards' }],
-            [{ text: t(chatId, 'btn_games'), callback_data: 'games' }]
+            [{ text: t(chatId, 'btn_games'), callback_data: 'games' }],
+            [{ text: '📢 Join Our Channel', url: 'https://t.me/turn8ver' }]
         ]
     };
 }

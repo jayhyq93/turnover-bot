@@ -24,7 +24,7 @@ const T = {
         btn_referral: '👥 Referral Program',
         btn_back: '◀️ Back to Menu',
         register: `📝 *How To Register*\n\n1. Click the Live Support button below\n2. Our agent will create your account\n3. Make your first deposit\n4. Start playing & earning!\n\n⚡ Registration is FREE and takes less than 5 minutes.`,
-        deposit: `💰 *How To Deposit*\n\n1. Contact our Live Support\n2. Tell the agent your desired amount\n3. Agent will provide bank account details\n4. Transfer and send your receipt\n5. Credits added instantly!\n\n🏦 *Supported:* Local bank transfer, TNG eWallet, GrabPay\n⚡ Processing time: Instant`,
+        deposit: `💰 *How To Deposit*\n\n*Step 1:* Transfer to our bank account below 👇\n\n🏦 *Bank:* BANK ISLAM\n👤 *Name:* PUAN SHARIFAH FATIMAH\n🔢 *Account:* 13044021038654\n\n*Step 2:* Screenshot your transfer receipt\n\n*Step 3:* Send receipt + your Game ID to our agent\n\n⚡ Credits added within 5 minutes after verification!\n\n✅ Min deposit: RM30\n✅ New members get 50% Welcome Bonus!`,
         withdraw: `💸 *How To Withdraw*\n\n1. Contact our Live Support\n2. Provide your bank account details\n3. State the amount you want to withdraw\n4. Agent processes your request\n\n⚡ Processing time: 5-15 minutes\n✅ No withdrawal fees`,
         bonus: `🎁 *Bonuses & Promotions*\n\n🌟 *50% Welcome Bonus*\nDeposit RM100 → Get RM150!\nFirst deposit only. New members.\n\n👥 *30% Referral Commission*\nInvite friends, earn 30% of their first deposit. Unlimited referrals!\n\n📅 *Daily Reload Bonus*\nBonus on every reload. Ask support for details.\n\n💡 Contact Live Support to claim any bonus!`,
         games: `🎰 *Available Games*\n\n🏆 *MEGA888*\nMalaysia's most popular slot platform. Hundreds of slot, table & arcade games.\n\n🔥 *PUSSY888*\nHigh-payout slots with stunning graphics.\n\n⭐ *918KISS*\nThe legendary classic trusted by millions.\n\n🎯 All games generate *turnover* towards your daily profit share!\n\nContact support to download any game.`,
@@ -48,7 +48,7 @@ const T = {
         btn_referral: '👥 Program Rujukan',
         btn_back: '◀️ Kembali ke Menu',
         register: `📝 *Cara Mendaftar*\n\n1. Klik butang Sokongan Langsung di bawah\n2. Ejen kami akan cipta akaun anda\n3. Buat deposit pertama anda\n4. Mula bermain & menjana pendapatan!\n\n⚡ Pendaftaran adalah PERCUMA dan mengambil masa kurang dari 5 minit.`,
-        deposit: `💰 *Cara Deposit*\n\n1. Hubungi Sokongan Langsung kami\n2. Beritahu ejen jumlah yang dikehendaki\n3. Ejen akan berikan butiran akaun bank\n4. Pindah dan hantar resit anda\n5. Kredit ditambah serta-merta!\n\n🏦 *Disokong:* Pindahan bank tempatan, TNG eWallet, GrabPay\n⚡ Masa pemprosesan: Serta-merta`,
+        deposit: `💰 *Cara Deposit*\n\n*Langkah 1:* Pindah ke akaun bank kami 👇\n\n🏦 *Bank:* BANK ISLAM\n👤 *Nama:* PUAN SHARIFAH FATIMAH\n🔢 *Akaun:* 13044021038654\n\n*Langkah 2:* Tangkap skrin resit pindahan anda\n\n*Langkah 3:* Hantar resit + ID Permainan anda kepada ejen kami\n\n⚡ Kredit ditambah dalam 5 minit selepas pengesahan!\n\n✅ Deposit minimum: RM30\n✅ Ahli baru dapat 50% Bonus Selamat Datang!`,
         withdraw: `💸 *Cara Pengeluaran*\n\n1. Hubungi Sokongan Langsung kami\n2. Berikan butiran akaun bank anda\n3. Nyatakan jumlah yang ingin dikeluarkan\n4. Ejen memproses permintaan anda\n\n⚡ Masa pemprosesan: 5-15 minit\n✅ Tiada caj pengeluaran`,
         bonus: `🎁 *Bonus & Promosi*\n\n🌟 *50% Bonus Selamat Datang*\nDeposit RM100 → Dapat RM150!\nDeposit pertama sahaja. Ahli baru.\n\n👥 *30% Komisen Rujukan*\nJemput rakan, dapat 30% dari deposit pertama mereka!\n\n📅 *Bonus Reload Harian*\nBonus pada setiap reload. Tanya sokongan untuk maklumat lanjut.\n\n💡 Hubungi Sokongan Langsung untuk tuntut sebarang bonus!`,
         games: `🎰 *Permainan Tersedia*\n\n🏆 *MEGA888*\nPlatform slot paling popular di Malaysia. Ratusan permainan slot, meja & arked.\n\n🔥 *PUSSY888*\nSlot pembayaran tinggi dengan grafik memukau.\n\n⭐ *918KISS*\nKlasik lagenda yang dipercayai jutaan pemain.\n\n🎯 Semua permainan menjana *turnover* untuk bahagian keuntungan harian anda!\n\nHubungi sokongan untuk muat turun mana-mana permainan.`,
@@ -68,6 +68,16 @@ function getLang(chatId) {
 function t(chatId, key) {
     const lang = getLang(chatId);
     return T[lang][key] || T['en'][key] || key;
+}
+
+async function sendPhoto(chatId, photoUrl, caption = '') {
+  const body = { chat_id: chatId, photo: photoUrl, caption, parse_mode: 'Markdown' };
+  const res = await fetch(`${API}/sendPhoto`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  return res.json();
 }
 
 async function sendMessage(chatId, text, keyboard = null) {
@@ -160,6 +170,10 @@ async function handleCallback(chatId, callbackData, messageId, firstName) {
         await sendMessage(chatId, t(chatId, 'register'), backKeyboard(chatId));
     } else if (callbackData === 'deposit') {
         await sendMessage(chatId, t(chatId, 'deposit'), backKeyboard(chatId));
+        // Send QR code
+        await sendPhoto(chatId, 'https://raw.githubusercontent.com/jayhyq93/turnover-bot/master/qr.png',
+            '📱 *DuitNow QR* — Scan to pay instantly!')
+            .catch(() => {}); // Silently fail if QR not available
     } else if (callbackData === 'withdraw') {
         await sendMessage(chatId, t(chatId, 'withdraw'), backKeyboard(chatId));
     } else if (callbackData === 'bonus') {
